@@ -10,14 +10,22 @@ urlopen = requests.get(url)
 if str(urlopen) != '<Response [200]>':
     print('USERNAME NOT FOUND')
     exit()
+    
+#opening url
 urlopen = urlopen.text
 soup = BeautifulSoup(urlopen, 'html.parser')
+
+
+# about section operations
 about_tag = soup.find('div', class_='p-note user-profile-bio mb-3 js-user-profile-bio f4')
 print('------------------ABOUT------------------\n')
 try:
     print(about_tag.find('div').text)
 except:
     print('No About section found')
+    
+    
+# repository list operations
 repo_class_tag = soup.find_all('h3', class_='wb-break-all')
 repo_list = list()
 for i in repo_class_tag:
